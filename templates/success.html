@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> {% include 'header.html' %}
+    <title>Email Validation</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Email validation with DB</h1> 
+        <a href="/">Go back</a>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="success">
+            {% for message in messages %}
+            <p>{{message}}</p>
+            {% endfor %}
+        </div>
+        {% else %}
+        <br><br>
+        {% endif %}
+        {% endwith %}
+
+        <h3>Email addresses entered:</h3>
+        {% for email in emails %}
+        <div class="row">
+            <p class="col-md-offset-2 col-md-3">{{email.email}}</p>
+            <p class="col-md-3">{{email.created_at.strftime('%m/%d/%y %-I:%M %p')}}</p>
+            <a class="col-md-3 danger" href="/delete/{{email.id}}">Delete</a>
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+
+</html>
